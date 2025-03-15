@@ -1,0 +1,159 @@
+openapi: 3.0.1
+info:
+  title: Complaint Management API
+  description: API for managing product complaints
+  version: 1.0.0
+paths:
+  /api/complaints:
+    post:
+      summary: Add a new complaint
+      description: Creates a new complaint or increments the complaint count if one already exists.
+      operationId: addComplaint
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddComplaintRequest'
+      responses:
+        '200':
+          description: Successfully created the complaint
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddComplaintResponse'
+        '400':
+          description: Invalid input
+  /api/complaints/{id}:
+    put:
+      summary: Update a complaint's content
+      description: Updates the content of an existing complaint.
+      operationId: updateComplaintContent
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: The ID of the complaint to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateComplaintRequest'
+      responses:
+        '200':
+          description: Successfully updated the complaint
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateComplaintResponse'
+        '404':
+          description: Complaint not found
+    get:
+      summary: Get a complaint by ID
+      description: Fetches a complaint by its unique identifier.
+      operationId: getComplaintById
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: The ID of the complaint to fetch
+      responses:
+        '200':
+          description: Complaint found and returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Complaint'
+        '404':
+          description: Complaint not found
+components:
+  schemas:
+    AddComplaintRequest:
+      type: object
+      properties:
+        productId:
+          type: integer
+          format: int64
+          description: The ID of the product
+        content:
+          type: string
+          description: The content of the complaint
+        reporter:
+          type: string
+          description: The person reporting the complaint
+        ip:
+          type: string
+          description: The IP of the user
+      required:
+        - productId
+        - content
+        - reporter
+        - ip
+    AddComplaintResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: The unique identifier of the complaint
+      required:
+        - id
+    Complaint:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: The unique identifier of the complaint
+        productId:
+          type: integer
+          format: int64
+          description: The ID of the product
+        content:
+          type: string
+          description: The content of the complaint
+        createdAt:
+          type: string
+          format: date-time
+          description: The timestamp of when the complaint was created
+        reporter:
+          type: string
+          description: The person reporting the complaint
+        country:
+          type: string
+          description: The country from which the complaint was submitted
+        count:
+          type: integer
+          description: The number of complaints submitted for the same product and reporter
+      required:
+        - id
+        - productId
+        - content
+        - createdAt
+        - reporter
+        - country
+        - count
+    UpdateComplaintRequest:
+      type: object
+      properties:
+        content:
+          type: string
+          description: The new content for the complaint
+      required:
+        - content
+    UpdateComplaintResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: The unique identifier of the complaint
+      required:
+        - id
