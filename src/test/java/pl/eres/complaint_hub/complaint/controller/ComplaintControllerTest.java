@@ -110,7 +110,7 @@ class ComplaintControllerTest {
                 .andExpect(jsonPath("$.id").value(complaint.getId()))
                 .andExpect(jsonPath("$.productId").value(4L))
                 .andExpect(jsonPath("$.content").value("some content"))
-                .andExpect(jsonPath("$.createdAt").value("2025-03-03T10:10:10.123+01:00"))
+                .andExpect(jsonPath("$.createdAt").value("2025-03-03T10:10:10.123Z"))
                 .andExpect(jsonPath("$.reporter").value("user1"))
                 .andExpect(jsonPath("$.country").value("Unknown"))
                 .andExpect(jsonPath("$.count").value(1L));

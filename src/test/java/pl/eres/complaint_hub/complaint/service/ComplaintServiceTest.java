@@ -13,10 +13,7 @@ import pl.eres.complaint_hub.complaint.repository.ComplaintRepository;
 import pl.eres.complaint_hub.complaint.util.GeoLocationService;
 import pl.eres.generated.model.AddComplaintRequest;
 
-import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.time.*;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -132,7 +129,7 @@ class ComplaintServiceTest {
         public static final String COMPLAINT_REPORTER = "user1";
         public static final String COMPLAINT_COUNTRY = "USA";
         public static final LocalDateTime COMPLAINT_CREATED_AT_LDT = LocalDateTime.parse("2025-03-03T10:10:10.123");
-        public static final OffsetDateTime COMPLAINT_CREATED_AT_ODT = ZonedDateTime.of(COMPLAINT_CREATED_AT_LDT, ZoneId.systemDefault()).toOffsetDateTime();
+        public static final OffsetDateTime COMPLAINT_CREATED_AT_ODT = COMPLAINT_CREATED_AT_LDT.atOffset(ZoneOffset.UTC);
         public static final int COMPLAINT_COUNT = 1;
         public static final String COMPLAINT_IP = "192.168.0.1";
 
