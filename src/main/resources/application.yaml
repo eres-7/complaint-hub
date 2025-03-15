@@ -21,3 +21,6 @@ spring:
 geo:
   api:
     url: http://ip-api.com/json/%s
+springdoc:
+  server:
+    base-url: https://ubiquitous-funicular-v644xg9jrqj2p5wx-8080.app.github.dev

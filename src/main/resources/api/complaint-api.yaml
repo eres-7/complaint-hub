@@ -3,6 +3,11 @@ info:
   title: Complaint Management API
   description: API for managing product complaints
   version: 1.0.0
+servers:
+  - url: https://ubiquitous-funicular-v644xg9jrqj2p5wx-8080.app.github.dev/
+    description: Github Codespace
+  - url: http://localhost:8080
+    description: Local Development Server
 paths:
   /api/complaints:
     post:
